@@ -24,6 +24,9 @@ const skills = [
   "Git",
   "GitHub",
   "Vercel",
+  "Render",
+  "Framer",
+  "GSAP"
 ];
 
 export const Hero = () => {
@@ -94,13 +97,18 @@ export const Hero = () => {
             </div>
 
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg">
-                Contact Me <ArrowRight className="w-5 h-5" />
-              </Button>
-              <AnimatedBorderButton>
-                <Download className="w-5 h-5" />
-                Download CV
-              </AnimatedBorderButton>
+              <a href="#contact">
+                <Button size="lg">
+                  Contact Me <ArrowRight className="w-5 h-5" />
+                </Button>
+              </a>
+
+              <a href="Syeed_CV.pdf" download="Syeed_CV.pdf">
+                <AnimatedBorderButton>
+                  <Download className="w-5 h-5" />
+                  Download CV
+                </AnimatedBorderButton>
+              </a>
             </div>
 
             <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
