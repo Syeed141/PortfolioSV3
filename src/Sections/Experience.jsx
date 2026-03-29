@@ -62,7 +62,7 @@ export const Experience = () => {
   >
     My{" "}
     <span className="font-serif italic font-normal text-white">
-      Experience & Growth
+      Experience & Growth so Far
     </span>
   </h2>
 
@@ -70,7 +70,7 @@ export const Experience = () => {
     className="text-muted-foreground
     animate-fade-in animation-delay-200"
   >
-   A Computer Science graduate focused on web development, project leadership, problem solving, and research in AI-driven systems.
+   I am a Computer Science graduate focused on web development, project leadership, problem solving, and research in AI-driven systems.
   </p>
 </div>
 

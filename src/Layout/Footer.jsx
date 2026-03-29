@@ -34,9 +34,7 @@ export const Footer = () => {
               </span>
             </a>
 
-            <p className="text-sm text-muted-foreground mt-3 max-w-xs mx-auto md:mx-0">
-              Frontend developer focused on building modern, responsive, and user-friendly web experiences.
-            </p>
+           
 
             <p className="text-sm text-muted-foreground mt-3">
               © {currentYear} Syeed. All rights reserved.

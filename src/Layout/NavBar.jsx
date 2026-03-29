@@ -6,7 +6,6 @@ const navLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
-  // { href: "#testimonials", label: "Testimonials" },
 ];
 
 export const Navbar = () => {
@@ -22,6 +21,21 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+
+    const section = document.getElementById(targetId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
@@ -29,7 +43,18 @@ export const Navbar = () => {
       } z-50`}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center">
+        <a
+          href="#"
+          className="flex items-center"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+            setIsMobileMenuOpen(false);
+          }}
+        >
           <img
             src="/logo.png"
             alt="Syeed logo"
@@ -43,7 +68,8 @@ export const Navbar = () => {
               <a
                 href={link.href}
                 key={index}
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface"
+                onClick={(e) => handleNavClick(e, link.href.replace("#", ""))}
+                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface transition-colors"
               >
                 {link.label}
               </a>
@@ -52,7 +78,10 @@ export const Navbar = () => {
         </div>
 
         <div className="hidden md:block">
-          <a href="#contact">
+          <a
+            href="#contact"
+            onClick={(e) => handleNavClick(e, "contact")}
+          >
             <Button size="sm">Contact Me</Button>
           </a>
         </div>
@@ -72,19 +101,16 @@ export const Navbar = () => {
               <a
                 href={link.href}
                 key={index}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-muted-foreground hover:text-foreground py-2"
+                onClick={(e) => handleNavClick(e, link.href.replace("#", ""))}
+                className="text-lg text-muted-foreground hover:text-foreground py-2 transition-colors"
               >
                 {link.label}
               </a>
             ))}
 
             <Button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" });
+              onClick={(e) => {
+                handleNavClick(e, "contact");
               }}
             >
               Contact Me

@@ -1,7 +1,5 @@
 import { useMemo } from "react";
-import { Button } from "../Components/Button";
 import {
-  ArrowRight,
   ChevronDown,
   Github,
   Linkedin,
@@ -43,7 +41,7 @@ const techCategories = [
   {
     title: "Animation",
     items: [
-      { name: "Framer", icon: Sparkles },
+      { name: "Framer Motion", icon: Sparkles },
       { name: "GSAP", icon: Wand2 },
     ],
   },
@@ -65,7 +63,7 @@ const techCategories = [
 
 export const Hero = () => {
   const dots = useMemo(() => {
-    return Array.from({ length: 30 }, (_, i) => ({
+    return Array.from({ length: 20 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
@@ -74,26 +72,27 @@ export const Hero = () => {
     }));
   }, []);
 
-  const [frontend, ...restCategories] = techCategories;
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Bg */}
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      {/* Background */}
       <div className="absolute inset-0">
         <img
           src="/hero-bg.jpg"
           alt="Hero background"
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-25"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/80 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/40 via-background/85 to-background" />
       </div>
 
-      {/* Green Dots */}
+      {/* Floating dots */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {dots.map((dot) => (
           <div
             key={dot.id}
-            className="absolute w-1.5 h-1.5 rounded-full opacity-60"
+            className="absolute w-1.5 h-1.5 rounded-full opacity-40"
             style={{
               backgroundColor: "#20B2A6",
               left: `${dot.left}%`,
@@ -105,172 +104,103 @@ export const Hero = () => {
         ))}
       </div>
 
-      {/* Content */}
       <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column */}
-          <div className="space-y-8">
-            <div className="animate-fade-in">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
-                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                Frontend Dev • Problem Solver
-              </span>
-            </div>
+        <div className="max-w-4xl mx-auto text-center">
+          {/* <div className="animate-fade-in">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
+              <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              Frontend Developer
+            </span>
+          </div> */}
 
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100">
-                Developing
-                <span className="text-primary glow-text">
-                  {" "}
-                  practical web solutions{" "}
-                </span>
-                through clean code.
-              </h1>
+          <div className="mt-6 space-y-4 animate-fade-in animation-delay-100">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
+              Hi, I am Syeed !
+            </h1>
 
-              <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                Hi, I'm Shahriar Syeed — a Frontend Dev who enjoys solving
-                problems by building practical web applications.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              
-
-              <a href="Syeed_CV.pdf" download="Syeed_CV.pdf">
-                <AnimatedBorderButton>
-                  <Download className="w-5 h-5" />
-                  Download CV
-                </AnimatedBorderButton>
-              </a>
-            </div>
-
-            <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
-              <span className="text-sm text-muted-foreground">Add me:</span>
-
-              {[
-                { icon: Github, href: "https://github.com/Syeed141" },
-                {
-                  icon: Linkedin,
-                  href: "https://www.linkedin.com/in/syeed141",
-                },
-                {
-                  icon: Facebook,
-                  href: "https://www.facebook.com/shourdo.sayed",
-                },
-              ].map((social, idx) => (
-                <a
-                  key={idx}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-
-            {/* Tech Stack */}
-            <div className="pt-4 animate-fade-in animation-delay-500">
-              <p className="text-sm text-muted-foreground mb-5">
-                Technologies I work with
-              </p>
-
-              {/* Row 1: Frontend */}
-              <div className="space-y-2 mb-5">
-                <h3 className="text-sm font-semibold text-primary">
-                  {frontend.title}
-                </h3>
-
-                <div className="flex flex-wrap gap-2">
-                  {frontend.items.map((item) => {
-                    const Icon = item.icon;
-
-                    return (
-                      <span
-                        key={item.name}
-                        className="inline-flex items-center gap-2 px-3 py-2 rounded-full glass text-sm text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all duration-300"
-                      >
-                        <Icon className="w-4 h-4 text-primary" />
-                        {item.name}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Row 2 and 3: Backend | Animation, Database | Tools */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5 max-w-3xl">
-                {restCategories.map((category) => (
-                  <div key={category.title} className="space-y-2">
-                    <h3 className="text-sm font-semibold text-primary">
-                      {category.title}
-                    </h3>
-
-                    <div className="flex flex-wrap gap-2">
-                      {category.items.map((item) => {
-                        const Icon = item.icon;
-
-                        return (
-                          <span
-                            key={item.name}
-                            className="inline-flex items-center gap-2 px-3 py-2 rounded-full glass text-sm text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all duration-300"
-                          >
-                            <Icon className="w-4 h-4 text-primary" />
-                            {item.name}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* <p className="text-base md:text-lg text-muted-foreground leading-8 max-w-2xl mx-auto">
+              I am a frontend developer focused on building clean, responsive,
+              and user-friendly web applications. I enjoy turning ideas into
+              practical digital experiences and solving real problems through
+              code.
+            </p> */}
           </div>
 
-          {/* Right Column */}
-          <div className="relative animate-fade-in animation-delay-300">
-            <div className="relative max-w-md mx-auto">
-              <div
-                className="absolute inset-0 
-                rounded-3xl bg-linear-to-br 
-                from-primary/30 via-transparent 
-                to-primary/10 blur-2xl animate-pulse"
-              />
+          <div className="mt-8 flex flex-wrap justify-center gap-4 animate-fade-in animation-delay-200">
+            <a href="CV_of_Syeed.pdf" download="CV_of_Syeed.pdf">
+              <AnimatedBorderButton>
+                <Download className="w-5 h-5" />
+                Download CV
+              </AnimatedBorderButton>
+            </a>
+          </div>
 
-              <div className="relative glass rounded-3xl p-2 glow-border">
-                <img
-                  src="/s3.png"
-                  alt="Shahriar Syeed"
-                  className="w-full aspect-4/5 object-cover rounded-2xl"
-                />
+          <div className="mt-6 flex items-center justify-center gap-4 animate-fade-in animation-delay-300">
+            {[
+              { icon: Github, href: "https://github.com/Syeed141" },
+              {
+                icon: Linkedin,
+                href: "https://www.linkedin.com/in/syeed141",
+              },
+              {
+                icon: Facebook,
+                href: "https://www.facebook.com/shourdo.sayed",
+              },
+            ].map((social, idx) => (
+              <a
+                key={idx}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
+              >
+                <social.icon className="w-5 h-5" />
+              </a>
+            ))}
+          </div>
 
-                <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium">
-                      Available for work
-                    </span>
+          <div className="mt-14 glass-strong rounded-3xl p-6 md:p-8 glow-border text-left animate-fade-in animation-delay-400">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center">
+              My Tech Stack
+            </h2>
+
+            <div className="space-y-5">
+              {techCategories.map((category) => (
+                <div key={category.title}>
+                  <h3 className="text-sm md:text-base font-semibold text-primary mb-2">
+                    {category.title}
+                  </h3>
+
+                  <div className="flex flex-wrap gap-2">
+                    {category.items.map((item) => {
+                      const Icon = item.icon;
+
+                      return (
+                        <div
+                          key={item.name}
+                          className="inline-flex items-center gap-2 px-3 py-2 rounded-xl glass text-sm text-foreground hover:text-primary transition-all duration-300"
+                        >
+                          <Icon className="w-4 h-4 text-primary" />
+                          <span>{item.name}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-
-                <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                  <div className="text-xs text-muted-foreground">
-                    Solving problems, one commit at a time
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Scroll Down */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animation-delay-800">
+<div className="mt-5">
+
+</div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animation-delay-500 ">
           <a
             href="#about"
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
+            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
           >
-            <span className="text-xs uppercase tracking-wider">Scroll</span>
+            <span className="text-xs uppercase tracking-wider ">Scroll</span>
             <ChevronDown className="w-6 h-6 animate-bounce" />
           </a>
         </div>

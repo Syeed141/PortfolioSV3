@@ -1,5 +1,103 @@
 @import "tailwindcss";
 
+
+
+/* custom curser start */
+
+body {
+  cursor: none;
+}
+
+a,
+button,
+[role="button"],
+.cursor-hover {
+  cursor: none;
+}
+
+.neo-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 30px;
+  pointer-events: none;
+  transform: translate(-2px, -2px);
+  z-index: 99999;
+}
+
+.neo-pointer__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.neo-pointer__fill {
+  fill: #071019;
+}
+
+.neo-pointer__stroke {
+  fill: none;
+  stroke: #33d6ff;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(51, 214, 255, 0.45))
+    drop-shadow(0 0 8px rgba(51, 214, 255, 0.22))
+    drop-shadow(0 0 16px rgba(51, 214, 255, 0.12));
+  animation: cursorGlowPulse 2s ease-in-out infinite;
+}
+
+/* .neo-pointer__stroke {
+  fill: none;
+  stroke: #33d6ff;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(51, 214, 255, 0.38))
+    drop-shadow(0 0 8px rgba(51, 214, 255, 0.18))
+    drop-shadow(0 0 14px rgba(51, 214, 255, 0.1));
+  animation: cursorGlowPulse 1.6s ease-in-out infinite;
+} */
+
+.neo-pointer--hover .neo-pointer__stroke {
+  stroke: #8cefff;
+  filter: drop-shadow(0 0 6px rgba(140, 239, 255, 0.95))
+    drop-shadow(0 0 14px rgba(51, 214, 255, 0.4))
+    drop-shadow(0 0 24px rgba(51, 214, 255, 0.2));
+}
+
+@keyframes cursorGlowPulse {
+  0%,
+  100% {
+    stroke: rgba(51, 214, 255, 0.55);
+    filter: drop-shadow(0 0 2px rgba(51, 214, 255, 0.28))
+      drop-shadow(0 0 6px rgba(51, 214, 255, 0.14))
+      drop-shadow(0 0 12px rgba(51, 214, 255, 0.08));
+  }
+
+  50% {
+    stroke: rgba(123, 239, 255, 1);
+    filter: drop-shadow(0 0 6px rgba(123, 239, 255, 0.95))
+      drop-shadow(0 0 14px rgba(51, 214, 255, 0.45))
+      drop-shadow(0 0 24px rgba(51, 214, 255, 0.22));
+  }
+}
+
+@media (max-width: 768px) {
+  body,
+  a,
+  button,
+  [role="button"],
+  .cursor-hover {
+    cursor: auto;
+  }
+
+  .neo-pointer {
+    display: none;
+  }
+}
+
+/* custom curser end */
+
 /* pre loader */
 .preloader {
   position: fixed;
@@ -161,6 +259,10 @@
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
+}
+
+section {
+  scroll-margin-top: 100px;
 }
 
 body {

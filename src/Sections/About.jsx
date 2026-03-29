@@ -4,95 +4,69 @@ const highlights = [
   {
     icon: Code2,
     title: "Clean Code",
-    description:
-      "Writing maintainable, scalable code that stands the test of time.",
+    description: "Writing maintainable and scalable code.",
   },
   {
     icon: Rocket,
     title: "Performance",
-    description:
-      "Optimizing for speed and delivering lightning-fast user experiences.",
+    description: "Building fast and responsive user experiences.",
   },
   {
     icon: Users,
     title: "Collaboration",
-    description: "Working closely with teams to bring ideas to life.",
+    description: "Working well with teams to build better products.",
   },
   {
     icon: Lightbulb,
-    title: "Innovation",
-    description:
-      "Staying ahead with the latest technologies and best practices.",
+    title: "Learning",
+    description: "Improving through practice and new technologies.",
   },
 ];
 
 export const About = () => {
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
+    <section id="about" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column */}
-          <div className="space-y-8">
-            <div className="animate-fade-in">
-              <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
-                About Me
-              </span>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in animation-delay-100 text-secondary-foreground">
-              Turning ideas into reality,
-              <span className="font-serif italic font-normal text-white">
-                {" "}
-                one component at a time.
-              </span>
-            </h2>
-
-            <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
-              <p>
-                I'm a frontend developer who enjoys building practical web
-                applications and improving my problem-solving skills through
-                real projects. My interest in web development started from
-                curiosity about how websites work and has gradually grown into
-                hands-on experience with modern JavaScript tools.
-              </p>
-
-              <p>
-                I mainly work with technologies like React, JavaScript, Tailwind
-                CSS, Node.js, Express, and MongoDB. I enjoy building responsive
-                interfaces, experimenting with new ideas, and turning simple
-                concepts into working web applications.
-              </p>
-
-              <p>
-                Outside of development, I spend time solving programming
-                problems, learning new technologies, and improving my
-                understanding of software development through practice and
-                experimentation.
-              </p>
-            </div>
-
-            <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300">
-              <p className="text-lg font-medium italic text-foreground">
-                "My goal is to build web applications that are practical, easy
-                to use, and maintainable, with a focus on clean code and good
-                user experience."
-              </p>
-            </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="animate-fade-in">
+            <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
+              About Me
+            </span>
           </div>
 
-          {/* Right Column - Hilights */}
-          <div className="grid sm:grid-cols-2 gap-6">
+          <h2 className="text-3xl md:text-4xl font-bold mt-4 animate-fade-in animation-delay-100 text-secondary-foreground">
+            A frontend developer focused on building practical and user-friendly web applications.
+          </h2>
+
+          <div className="mt-6 space-y-4 text-muted-foreground animate-fade-in animation-delay-200 max-w-3xl mx-auto">
+            <p>
+              I am a frontend developer who enjoys building clean, responsive,
+              and practical web applications. My interest in web development
+              started from curiosity about how websites work and has grown into
+              hands-on experience with modern web technologies.
+            </p>
+
+            <p>
+              I mainly work with React, JavaScript, Tailwind CSS, Node.js,
+              Express, and MongoDB. I enjoy turning ideas into working products
+              and improving my problem-solving skills through real projects.
+            </p>
+          </div>
+
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {highlights.map((item, idx) => (
               <div
                 key={idx}
-                className="glass p-6 rounded-2xl animate-fade-in"
+                className="glass p-5 rounded-2xl text-left animate-fade-in"
                 style={{ animationDelay: `${(idx + 1) * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 hover:bg-primary/20">
-                  <item.icon className="w-6 h-6 text-primary" />
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <item.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">
+
+                <h3 className="text-base font-semibold mb-2">{item.title}</h3>
+
+                <p className="text-sm text-muted-foreground leading-6">
                   {item.description}
                 </p>
               </div>
