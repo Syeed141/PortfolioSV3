@@ -1,29 +1,39 @@
+import { useState } from "react";
+import Preloader from "./Components/Preloader";
+
 import { Footer } from "./Layout/Footer";
 import NavBar from "./Layout/NavBar";
 import About from "./Sections/About";
 import Contact from "./Sections/Contact";
 import Expereince from "./Sections/Expereince";
 import Hero from "./Sections/Hero";
-
 import { Projects } from "./Sections/Projects";
 import Testimonial from "./Sections/Testimonial";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <NavBar></NavBar>
+    <>
+      {loading && <Preloader onFinish={() => setLoading(false)} />}
 
-      <main>
-        <Hero> </Hero>
-        <About> </About>
-        <Projects></Projects>
-        <Expereince></Expereince>
-        <Testimonial> </Testimonial>
-        <Contact></Contact>
-      </main>
+     
+        <div className="min-h-screen overflow-x-hidden">
+          <NavBar />
 
-      <Footer> </Footer>
-    </div>
+          <main>
+            <Hero />
+            <About />
+            <Projects />
+            <Expereince />
+            <Testimonial />
+            <Contact />
+          </main>
+
+          <Footer />
+        </div>
+    
+    </>
   );
 }
 

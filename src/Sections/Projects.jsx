@@ -2,41 +2,41 @@ import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../Components/AnimatedBorderButton";
 const projects = [
   {
-  title: "Skycast AI",
-  description:
-    "A full-stack AI-powered weather application delivering real-time forecasts, hourly insights, and personalized recommendations with a dynamic, weather-responsive UI.",
-  image: "/projects/P1.png",
-  tags: ["React", "Vite", "Node.js", "Express", "AI"],
-  link: "https://weather-app-delta-gray-67.vercel.app/",
-  github: "https://github.com/Syeed141/Weather-app",
-},
+    title: "Skycast AI",
+    description:
+      "A full-stack AI-powered weather application delivering real-time forecasts, hourly insights, and personalized recommendations with a dynamic, weather-responsive UI.",
+    image: "/projects/P1.png",
+    tags: ["React", "Vite", "Node.js", "Express", "AI"],
+    link: "https://weather-app-delta-gray-67.vercel.app/",
+    github: "https://github.com/Syeed141/Weather-app",
+  },
   {
-  title: "AI Resume Analyzer",
-  description:
-    "An AI-powered web app that analyzes PDF resumes, evaluates ATS compatibility, scores resume quality, and provides personalized feedback through an interactive AI assistant.",
-  image: "/projects/P2.png",
-  tags: ["React", "Vite", "TailwindCSS", "Puter AI", "PDF.js"],
-  link: "https://simple-resume-analyzer.surge.sh/",
-  github: "https://github.com/Syeed141/MyResumeAnalyzer",
-} ,
-{
-  title: "Book Vibe",
-  description:
-    "A modern book tracking web app where users can browse books, view details, and mark them as read with data stored locally.",
-  image: "/projects/P3.png",
-  tags: ["React", "Vite", "Tailwind CSS", "DaisyUI", "LocalStorage"],
-  link: "https://book-vibe-delta.vercel.app/",
-  github: "https://github.com/Syeed141/BookVibe",
-},
+    title: "AI Resume Analyzer",
+    description:
+      "An AI-powered web app that analyzes PDF resumes, evaluates ATS compatibility, scores resume quality, and provides personalized feedback through an interactive AI assistant.",
+    image: "/projects/P2.png",
+    tags: ["React", "Vite", "TailwindCSS", "Puter AI", "PDF.js"],
+    link: "https://simple-resume-analyzer.surge.sh/",
+    github: "https://github.com/Syeed141/MyResumeAnalyzer",
+  },
   {
-  title: "Syeed's App Zone",
-  description:
-    "A modern web app that showcases a collection of applications with real-time search, responsive design, and a clean user-friendly interface.",
-  image: "/projects/P4.png",
-  tags: ["React", "React Router", "Tailwind CSS", "DaisyUI"],
-  link: "https://syeeds-app-zone.surge.sh/",
-  github: "https://github.com/Syeed141/Syeed-s-App-Zone",
-},
+    title: "Book Vibe",
+    description:
+      "A modern book tracking web app where users can browse books, view details, and mark them as read with data stored locally.",
+    image: "/projects/P3.png",
+    tags: ["React", "Vite", "Tailwind CSS", "DaisyUI", "LocalStorage"],
+    link: "https://book-vibe-delta.vercel.app/",
+    github: "https://github.com/Syeed141/BookVibe",
+  },
+  {
+    title: "Syeed's App Zone",
+    description:
+      "A modern web app that showcases a collection of applications with real-time search, responsive design, and a clean user-friendly interface.",
+    image: "/projects/P4.png",
+    tags: ["React", "React Router", "Tailwind CSS", "DaisyUI"],
+    link: "https://syeeds-app-zone.surge.sh/",
+    github: "https://github.com/Syeed141/Syeed-s-App-Zone",
+  },
 ];
 
 export const Projects = () => {
@@ -134,10 +134,16 @@ export const Projects = () => {
 
         {/* View All CTA */}
         <div className="text-center mt-12 animate-fade-in animation-delay-500">
-          <AnimatedBorderButton>
-            View All Projects
-            <ArrowUpRight className="w-5 h-5" />
-          </AnimatedBorderButton>
+          <a
+            href="https://github.com/Syeed141"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AnimatedBorderButton>
+              View All Projects
+              <ArrowUpRight className="w-5 h-5" />
+            </AnimatedBorderButton>
+          </a>
         </div>
       </div>
     </section>
