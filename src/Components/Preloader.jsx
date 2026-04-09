@@ -7,7 +7,7 @@ export default function Preloader({ onFinish }) {
     const timer = setTimeout(() => {
       document.body.style.overflow = "";
       onFinish();
-    }, 2400);
+    }, 1850);
 
     return () => {
       document.body.style.overflow = "";

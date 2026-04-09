@@ -1,6 +1,98 @@
 import { ArrowUpRight, Github } from "lucide-react";
+import { motion } from "framer-motion";
 import { AnimatedBorderButton } from "../Components/AnimatedBorderButton";
+
+const sectionVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const fadeUpVariants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 55,
+      damping: 16,
+      mass: 1.1,
+    },
+  },
+};
+
+const cardsContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.28,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 62,
+      damping: 16,
+      mass: 1,
+    },
+  },
+};
+
+const projectsHeaderViewport = {
+  once: true,
+  amount: 0.5,
+  margin: "0px 0px -12% 0px",
+};
+
+const projectsGridViewport = {
+  once: true,
+  amount: 0.34,
+  margin: "0px 0px -8% 0px",
+};
+
+const projectsCtaViewport = {
+  once: true,
+  amount: 0.52,
+  margin: "0px 0px -10% 0px",
+};
+
 const projects = [
+  {
+    title: "Budget Sohokari",
+    description:
+      "A full-stack personal budgeting app built for fresh graduates and early-career professionals to track expenses, monitor savings, view monthly analytics, and export expense reports with a clean, demo-friendly experience.",
+    image: "/projects/P5.png",
+    tags: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Recharts",
+    ],
+    link: "https://budget-sohokari.vercel.app/",
+    github: "https://github.com/Syeed141/Budget_sohokari",
+  },
   {
     title: "Skycast AI",
     description:
@@ -28,15 +120,6 @@ const projects = [
     link: "https://book-vibe-delta.vercel.app/",
     github: "https://github.com/Syeed141/BookVibe",
   },
-  {
-    title: "Syeed's App Zone",
-    description:
-      "A modern web app that showcases a collection of applications with real-time search, responsive design, and a clean user-friendly interface.",
-    image: "/projects/P4.png",
-    tags: ["React", "React Router", "Tailwind CSS", "DaisyUI"],
-    link: "https://syeeds-app-zone.surge.sh/",
-    github: "https://github.com/Syeed141/Syeed-s-App-Zone",
-  },
 ];
 
 export const Projects = () => {
@@ -47,30 +130,50 @@ export const Projects = () => {
       <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mx-auto max-w-3xl mb-16">
-          <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
+        <motion.div
+          className="text-center mx-auto max-w-3xl mb-16"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={projectsHeaderViewport}
+        >
+          <motion.span
+            className="text-secondary-foreground text-sm font-medium tracking-wider uppercase block"
+            variants={fadeUpVariants}
+          >
             Featured Work
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
+          </motion.span>
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground"
+            variants={fadeUpVariants}
+          >
             Projects that
             <span className="font-serif italic font-normal text-white">
               {" "}
               make an impact.
             </span>
-          </h2>
-          <p className="text-muted-foreground animate-fade-in animation-delay-200">
+          </motion.h2>
+          <motion.p className="text-muted-foreground" variants={fadeUpVariants}>
             A selection of my recent work, from complex web applications to
             innovative tools that solve real-world problems.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          variants={cardsContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={projectsGridViewport}
+        >
           {projects.map((project, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
-              style={{ animationDelay: `${(idx + 1) * 100}ms` }}
+              className="group glass rounded-2xl overflow-hidden md:row-span-1"
+              variants={cardVariants}
+              whileHover={{ y: -2 }}
+              transition={{ type: "spring", stiffness: 180, damping: 24 }}
             >
               {/* Image */}
               <div className="relative overflow-hidden aspect-video">
@@ -88,12 +191,16 @@ export const Projects = () => {
                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <a
                     href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     <ArrowUpRight className="w-5 h-5" />
                   </a>
                   <a
                     href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     <Github className="w-5 h-5" />
@@ -128,23 +235,31 @@ export const Projects = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View All CTA */}
-        <div className="text-center mt-12 animate-fade-in animation-delay-500">
-          <a
+        <motion.div
+          className="text-center mt-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={projectsCtaViewport}
+          variants={fadeUpVariants}
+        >
+          <motion.a
             href="https://github.com/Syeed141"
             target="_blank"
             rel="noopener noreferrer"
+            whileHover={{ y: -1 }}
+            transition={{ type: "spring", stiffness: 180, damping: 24 }}
           >
             <AnimatedBorderButton>
               View All Projects
               <ArrowUpRight className="w-5 h-5" />
             </AnimatedBorderButton>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

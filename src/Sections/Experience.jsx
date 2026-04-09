@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const experiences = [
   {
     period: "May 2024 — June 2024",
@@ -37,6 +39,80 @@ const experiences = [
   },
 ];
 
+const sectionVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const fadeUpVariants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 55,
+      damping: 16,
+      mass: 1.1,
+    },
+  },
+};
+
+const timelineVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.28,
+    },
+  },
+};
+
+const getTimelineItemVariants = (index) => ({
+  hidden: {
+    opacity: 0,
+    x: index % 2 === 0 ? -24 : 24,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 62,
+      damping: 16,
+      mass: 1,
+    },
+  },
+});
+
+const experienceHeaderViewport = {
+  once: true,
+  amount: 0.5,
+  margin: "0px 0px -12% 0px",
+};
+
+const experienceTimelineViewport = {
+  once: true,
+  amount: 0.32,
+  margin: "0px 0px -8% 0px",
+};
+
+const experienceDotViewport = {
+  once: true,
+  amount: 0.72,
+  margin: "0px 0px -6% 0px",
+};
+
 export const Experience = () => {
   return (
     <section id="experience" className="py-32 relative overflow-hidden">
@@ -47,51 +123,66 @@ export const Experience = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-       <div className="max-w-3xl mx-auto text-center mb-16">
-  <span
-    className="text-secondary-foreground text-sm
-    font-medium tracking-wider uppercase animate-fade-in"
-  >
-    Career Journey
-  </span>
+        <motion.div
+          className="max-w-3xl mx-auto text-center mb-16"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={experienceHeaderViewport}
+        >
+          <motion.span
+            className="text-secondary-foreground text-sm font-medium tracking-wider uppercase block"
+            variants={fadeUpVariants}
+          >
+            Career Journey
+          </motion.span>
 
-  <h2
-    className="text-4xl md:text-5xl font-bold
-    mt-4 mb-6 animate-fade-in animation-delay-100
-    text-secondary-foreground"
-  >
-    My{" "}
-    <span className="font-serif italic font-normal text-white">
-      Experience & Growth so Far
-    </span>
-  </h2>
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground"
+            variants={fadeUpVariants}
+          >
+            My{" "}
+            <span className="font-serif italic font-normal text-white">
+              Experience & Growth so Far
+            </span>
+          </motion.h2>
 
-  <p
-    className="text-muted-foreground
-    animate-fade-in animation-delay-200"
-  >
-   I am a Computer Science graduate focused on web development, project leadership, problem solving, and research in AI-driven systems.
-  </p>
-</div>
+          <motion.p className="text-muted-foreground" variants={fadeUpVariants}>
+            I am a Computer Science graduate focused on web development, project
+            leadership, problem solving, and research in AI-driven systems.
+          </motion.p>
+        </motion.div>
 
         {/* Timeline */}
-        <div className="relative">
+        <motion.div
+          className="relative"
+          variants={timelineVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={experienceTimelineViewport}
+        >
           <div className="timeline-glow absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/70 via-primary/30 to-transparent md:-translate-x-1/2 shadow-[0_0_25px_rgba(32,178,166,0.8)]" />
 
           {/* Experience Items */}
           <div className="space-y-12">
             {experiences.map((exp, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="relative grid md:grid-cols-2 gap-8 animate-fade-in"
-                style={{ animationDelay: `${(idx + 1) * 150}ms` }}
+                className="relative grid md:grid-cols-2 gap-8"
+                variants={getTimelineItemVariants(idx)}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10">
+                <motion.div
+                  className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10"
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={experienceDotViewport}
+                  transition={{ type: "spring", stiffness: 180, damping: 18 }}
+                >
                   {exp.current && (
                     <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
                   )}
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div
@@ -128,10 +219,10 @@ export const Experience = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

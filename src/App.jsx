@@ -16,10 +16,10 @@ function App() {
 
   return (
     <>
-    <CustomCursor />
+      <CustomCursor />
       {loading && <Preloader onFinish={() => setLoading(false)} />}
 
-     
+      {!loading && (
         <div className="min-h-screen overflow-x-hidden">
           <NavBar />
 
@@ -34,7 +34,7 @@ function App() {
 
           <Footer />
         </div>
-    
+      )}
     </>
   );
 }

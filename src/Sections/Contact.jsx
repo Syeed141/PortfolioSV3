@@ -8,6 +8,7 @@ import {
   Github,
   Linkedin,
 } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "../Components/Button";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
@@ -47,6 +48,72 @@ const socialLinks = [
     href: "https://linkedin.com/in/your-username",
   },
 ];
+
+const sectionVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const fadeUpVariants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 55,
+      damping: 16,
+      mass: 1.1,
+    },
+  },
+};
+
+const columnsVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.22,
+    },
+  },
+};
+
+const columnVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 62,
+      damping: 16,
+      mass: 1,
+    },
+  },
+};
+
+const contactHeaderViewport = {
+  once: true,
+  amount: 0.5,
+  margin: "0px 0px -12% 0px",
+};
+
+const contactColumnsViewport = {
+  once: true,
+  amount: 0.32,
+  margin: "0px 0px -8% 0px",
+};
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -119,27 +186,48 @@ export const Contact = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-16"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={contactHeaderViewport}
+        >
+          <motion.span
+            className="text-secondary-foreground text-sm font-medium tracking-wider uppercase block"
+            variants={fadeUpVariants}
+          >
             Get In Touch
-          </span>
+          </motion.span>
 
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground"
+            variants={fadeUpVariants}
+          >
             Let&apos;s build{" "}
             <span className="font-serif italic font-normal text-white">
               something great.
             </span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-muted-foreground animate-fade-in animation-delay-200">
+          <motion.p className="text-muted-foreground" variants={fadeUpVariants}>
             Looking for a frontend developer for a freelance project, internship,
             or full-time role? Send me a message and I&apos;ll get back to you
             as soon as possible.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
+        <motion.div
+          className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto"
+          variants={columnsVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={contactColumnsViewport}
+        >
+          <motion.div
+            className="glass p-8 rounded-3xl border border-primary/30"
+            variants={columnVariants}
+          >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
@@ -217,36 +305,44 @@ export const Contact = () => {
                 )}
               </Button>
 
-           
-
-              {submitStatus.type && (
-                <div
-                  className={`flex items-center gap-3 p-4 rounded-xl ${
-                    submitStatus.type === "success"
-                      ? "bg-green-500/10 border border-green-500/20 text-green-400"
-                      : "bg-red-500/10 border border-red-500/20 text-red-400"
-                  }`}
-                >
-                  {submitStatus.type === "success" ? (
-                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                  ) : (
-                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                  )}
-                  <p className="text-sm">{submitStatus.message}</p>
-                </div>
-              )}
+              <AnimatePresence mode="wait">
+                {submitStatus.type && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 170,
+                      damping: 20,
+                    }}
+                    className={`flex items-center gap-3 p-4 rounded-xl ${
+                      submitStatus.type === "success"
+                        ? "bg-green-500/10 border border-green-500/20 text-green-400"
+                        : "bg-red-500/10 border border-red-500/20 text-red-400"
+                    }`}
+                  >
+                    {submitStatus.type === "success" ? (
+                      <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    )}
+                    <p className="text-sm">{submitStatus.message}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
-          </div>
+          </motion.div>
 
-          <div className="space-y-6 animate-fade-in animation-delay-400">
-            <div className="glass rounded-3xl p-8">
+          <motion.div className="space-y-6" variants={columnVariants}>
+            <motion.div className="glass rounded-3xl p-8" variants={fadeUpVariants}>
               <h3 className="text-xl font-semibold mb-6">
                 Contact Information
               </h3>
 
               <div className="space-y-4">
                 {contactInfo.map((item, i) => (
-                  <a
+                  <motion.a
                     key={i}
                     href={item.href}
                     target={item.label === "Location" ? "_blank" : undefined}
@@ -256,6 +352,8 @@ export const Contact = () => {
                         : undefined
                     }
                     className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
+                    whileHover={{ y: -1 }}
+                    transition={{ type: "spring", stiffness: 180, damping: 24 }}
                   >
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <item.icon className="w-5 h-5 text-primary" />
@@ -267,14 +365,15 @@ export const Contact = () => {
                       </div>
                       <div className="font-medium break-all">{item.value}</div>
                     </div>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-           
-
-            <div className="glass rounded-3xl p-8 border border-primary/30">
+            <motion.div
+              className="glass rounded-3xl p-8 border border-primary/30"
+              variants={fadeUpVariants}
+            >
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                 <span className="font-medium">Currently Available</span>
@@ -285,9 +384,9 @@ export const Contact = () => {
                 development opportunities. If you have an idea or role in mind,
                 feel free to reach out.
               </p>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

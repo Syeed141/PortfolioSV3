@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { motion } from "framer-motion";
 import {
   ChevronDown,
   Github,
@@ -15,7 +16,6 @@ import {
   Layers3,
   Code2,
   Sparkles,
-  Wand2,
 } from "lucide-react";
 import { AnimatedBorderButton } from "../Components/AnimatedBorderButton";
 
@@ -42,7 +42,7 @@ const techCategories = [
     title: "Animation",
     items: [
       { name: "Framer Motion", icon: Sparkles },
-      { name: "GSAP", icon: Wand2 },
+      // { name: "GSAP", icon: Wand2 },
     ],
   },
   {
@@ -60,6 +60,52 @@ const techCategories = [
     ],
   },
 ];
+
+const heroContainerVariants = {
+  hidden: { opacity: 1 },
+  visible: {
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.01,
+    },
+  },
+};
+
+const fadeUpVariants = {
+  hidden: {
+    opacity: 0,
+    y: 10,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 18,
+      mass: 0.8,
+    },
+  },
+};
+
+const socialVariants = {
+  hidden: {
+    opacity: 0,
+    y: 22,
+    scale: 0.72,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 220,
+      damping: 13,
+      mass: 0.7,
+    },
+  },
+};
 
 export const Hero = () => {
   const dots = useMemo(() => {
@@ -105,7 +151,12 @@ export const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          variants={heroContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* <div className="animate-fade-in">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
               <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -113,7 +164,7 @@ export const Hero = () => {
             </span>
           </div> */}
 
-          <div className="mt-6 space-y-4 animate-fade-in animation-delay-100">
+          <motion.div className="mt-6 space-y-4" variants={fadeUpVariants}>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
               Hi, I am Syeed !
             </h1>
@@ -124,18 +175,35 @@ export const Hero = () => {
               practical digital experiences and solving real problems through
               code.
             </p> */}
-          </div>
+          </motion.div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4 animate-fade-in animation-delay-200">
-            <a href="CV_of_Syeed.pdf" download="CV_of_Syeed.pdf">
+          <motion.div
+            className="mt-8 flex flex-wrap justify-center gap-4"
+            variants={fadeUpVariants}
+          >
+            <motion.a
+              href="CV_of_Syeed.pdf"
+              download="CV_of_Syeed.pdf"
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.985 }}
+              transition={{ type: "spring", stiffness: 260, damping: 22 }}
+            >
               <AnimatedBorderButton>
                 <Download className="w-5 h-5" />
                 Download CV
               </AnimatedBorderButton>
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
 
-          <div className="mt-6 flex items-center justify-center gap-4 animate-fade-in animation-delay-300">
+          <motion.div
+            className="mt-6 flex items-center justify-center gap-4"
+            initial="hidden"
+            animate="visible"
+            transition={{
+              staggerChildren: 0.12,
+              delayChildren: 0.7,
+            }}
+          >
             {[
               { icon: Github, href: "https://github.com/Syeed141" },
               {
@@ -147,19 +215,26 @@ export const Hero = () => {
                 href: "https://www.facebook.com/shourdo.sayed",
               },
             ].map((social, idx) => (
-              <a
+              <motion.a
                 key={idx}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
+                variants={socialVariants}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
               >
                 <social.icon className="w-5 h-5" />
-              </a>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="mt-14 glass-strong rounded-3xl p-6 md:p-8 glow-border text-left animate-fade-in animation-delay-400">
+          <motion.div
+            className="mt-14 glass-strong rounded-3xl p-6 md:p-8 glow-border text-left"
+            variants={fadeUpVariants}
+          >
             <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center">
               My Tech Stack
             </h2>
@@ -189,21 +264,32 @@ export const Hero = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-<div className="mt-5">
-
-</div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in animation-delay-500 ">
-          <a
+        <div className="mt-5"></div>
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.18,
+            type: "spring",
+            stiffness: 120,
+            damping: 20,
+            mass: 0.8,
+          }}
+        >
+          <motion.a
             href="#about"
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            whileHover={{ y: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 22 }}
           >
             <span className="text-xs uppercase tracking-wider ">Scroll</span>
-            <ChevronDown className="w-6 h-6 animate-bounce" />
-          </a>
-        </div>
+            <ChevronDown className="w-6 h-6" />
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

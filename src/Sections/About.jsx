@@ -1,4 +1,5 @@
 import { Code2, Lightbulb, Rocket, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const highlights = [
   {
@@ -23,22 +24,94 @@ const highlights = [
   },
 ];
 
+const sectionVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const fadeUpVariants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 55,
+      damping: 16,
+      mass: 1.1,
+    },
+  },
+};
+
+const cardsContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.28,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 62,
+      damping: 16,
+      mass: 1,
+    },
+  },
+};
+
+const aboutViewport = {
+  once: true,
+  amount: 0.52,
+  margin: "0px 0px -10% 0px",
+};
+
 export const About = () => {
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="animate-fade-in">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={aboutViewport}
+        >
+          <motion.div variants={fadeUpVariants}>
             <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
               About Me
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-3xl md:text-4xl font-bold mt-4 animate-fade-in animation-delay-100 text-secondary-foreground">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mt-4 text-secondary-foreground"
+            variants={fadeUpVariants}
+          >
             A frontend developer focused on building practical and user-friendly web applications.
-          </h2>
+          </motion.h2>
 
-          <div className="mt-6 space-y-4 text-muted-foreground animate-fade-in animation-delay-200 max-w-3xl mx-auto">
+          <motion.div
+            className="mt-6 space-y-4 text-muted-foreground max-w-3xl mx-auto"
+            variants={fadeUpVariants}
+          >
             <p>
               I am a frontend developer who enjoys building clean, responsive,
               and practical web applications. My interest in web development
@@ -51,14 +124,19 @@ export const About = () => {
               Express, and MongoDB. I enjoy turning ideas into working products
               and improving my problem-solving skills through real projects.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <motion.div
+            className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
+            variants={cardsContainerVariants}
+          >
             {highlights.map((item, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="glass p-5 rounded-2xl text-left animate-fade-in"
-                style={{ animationDelay: `${(idx + 1) * 100}ms` }}
+                className="glass p-5 rounded-2xl text-left"
+                variants={cardVariants}
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 180, damping: 24 }}
               >
                 <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <item.icon className="w-5 h-5 text-primary" />
@@ -69,10 +147,10 @@ export const About = () => {
                 <p className="text-sm text-muted-foreground leading-6">
                   {item.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
